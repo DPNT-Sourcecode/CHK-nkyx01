@@ -90,7 +90,7 @@ class Basket:
 
     def apply_offer_to_basket(self, sku: str, offer: Dict, basket: Dict[str, int]):
         total = 0
-        while basket[sku] > offer[NO_OF_ITEMS]:
+        while basket[sku] >= offer[NO_OF_ITEMS]:
             basket[sku] -= offer[NO_OF_ITEMS]
             total += offer[PRICE]
             if FREE in offer:
@@ -134,7 +134,7 @@ class CheckoutTestCase(unittest.TestCase):
         self.assertEqual(res, -1)
 
     def test_has_special_offer(self):
-        res = checkout('ABBBACDABA')
+        res = checkout('AAAABBBBCD')
         self.assertEqual(res, 130 + 50 + 2 * 45 + 20 + 15)
 
     def test_sku_a_offers(self):
@@ -151,4 +151,5 @@ class CheckoutTestCase(unittest.TestCase):
 
 if __name__=='__main__':
     unittest.main()
+
 
