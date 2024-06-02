@@ -130,7 +130,7 @@ def checkout(skus: str) -> int:
 
 class CheckoutTestCase(unittest.TestCase):
     def test_check_invalid(self):
-        res = checkout('ABHC')
+        res = checkout('ABHC#')
         self.assertEqual(res, -1)
 
     def test_has_special_offer(self):
