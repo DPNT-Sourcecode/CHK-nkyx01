@@ -254,6 +254,13 @@ class CheckoutTestCase(unittest.TestCase):
         res = checkout('R'*7+'QQQ')
         self.assertEqual(res, 50*7+30)
 
+    def test_VVVV(self):
+        res = checkout('V'*4)
+        self.assertEqual(res, 130+50)
+
+    def test_VVVVV(self):
+        res = checkout('V'*5)
+        self.assertEqual(res, 130+90)
 
 if __name__=='__main__':
     unittest.main()
