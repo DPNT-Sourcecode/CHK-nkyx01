@@ -90,14 +90,13 @@ class Basket:
 
     def apply_offer_to_basket(self, sku: str, offer: Dict, basket: Dict[str, int]):
         total = 0
-        n = basket[sku] // offer[NO_OF_ITEMS]
-        if n > 0:
-            basket[sku] -= n * offer[NO_OF_ITEMS]
-            total += n * offer[PRICE]
+        while basket[sku] > offer[NO_OF_ITEMS]:
+            basket[sku] -= offer[NO_OF_ITEMS]
+            total += offer[PRICE]
             if FREE in offer:
                 free_sku = offer[FREE]
                 if basket.get(free_sku, 0) > 0:
-                    basket[free_sku] -= n
+                    basket[free_sku] -= 1
         return total
     
     def checkout(self):
@@ -148,7 +147,7 @@ class CheckoutTestCase(unittest.TestCase):
 
     def test_check_2f_one_f_free(self):
         res = checkout('FFFF')
-        self.assertEqual(res, 40)
+        self.assertEqual(res, 30)
 
 if __name__=='__main__':
     unittest.main()
