@@ -230,6 +230,13 @@ class CheckoutTestCase(unittest.TestCase):
         res = checkout('FFFFFF')
         self.assertEqual(res, 40)
 
+    def test_h(self):
+        res = checkout('H'*16)
+        self.assertEqual(res, 80+45+10)
+
+    def test_k(self):
+        res = checkout('K'*5)
+        self.assertEqual(res, 150*2+80)
 
 if __name__=='__main__':
     unittest.main()
