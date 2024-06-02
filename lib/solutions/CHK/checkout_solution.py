@@ -188,6 +188,25 @@ class Basket:
                 total += self.apply_offer_to_basket(sku, offer, basket)
         return total
     
+    def check_and_apply_group_discount(self, level: int, basket: Dict[str, int]) -> int:
+        total = 0
+        offers = self._spcial_offers.get_offer(level, GROUP_DISCOUNT_OFFER)
+        if offers is not None:
+            for offer in offers:
+                no_of_items = offer[NO_OF_ITEMS]
+                mini_basket = ''
+                for sku in offer[SKUS]:
+                    if basket.get(sku, 0) > 0:
+                        mini_basket += basket[sku] * sku
+                        if len(mini_basket) > no_of_items:
+                            no_of_groups = len(mini_basket) // no_of_items
+                            total += no_of_groups * offer[PRICE]
+                            for i in range(no_of_groups*no_of_items):
+                                basket[mini_basket[i]] -= 1
+                            mini_basket = mini_basket[no_of_groups*no_of_items:]
+        return total
+
+    
     def checkout(self):
         total = 0
 
@@ -197,7 +216,7 @@ class Basket:
         
         for level in self._spcial_offers.offer_levels:
             # Check and apply group discount offer
-            total += self.check_and_apply_offers(level, GROUP_DISCOUNT_OFFER, basket)
+            total += self.check_and_apply_group_discount(level, basket)
 
             # Check and apply special offers
             for sku in basket:
@@ -286,3 +305,4 @@ class CheckoutTestCase(unittest.TestCase):
 
 if __name__=='__main__':
     unittest.main()
+
