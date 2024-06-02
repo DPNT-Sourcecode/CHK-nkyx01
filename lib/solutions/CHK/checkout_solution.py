@@ -40,7 +40,7 @@ def checkout(skus):
             n = basket[x] // special_offer_no
             if n > 0:
                 basket[x] -= n * special_offer_no
-                total += SPECIAL_OFFERS[x][PRICE]
+                total += n * SPECIAL_OFFERS[x][PRICE]
 
         if basket[x] > 0:
             total += basket[x] * PRICE_TABLE[x]
@@ -59,4 +59,5 @@ class CheckoutTestCase(unittest.TestCase):
 
 if __name__=='__main__':
     unittest.main()
+
 
