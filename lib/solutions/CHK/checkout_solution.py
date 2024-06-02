@@ -1,3 +1,5 @@
+from typing import Dict, List
+
 import unittest
 
 NO_OF_ITEMS = 'numberOfItems'
@@ -46,7 +48,7 @@ PRICE_TABLE = {
 
 
 # prepare basket and return None if invalid sku in the skus
-def get_basket(skus):
+def get_basket(skus) -> Dict[str, int]:
     basket =  {}
     for item in skus:
         # Validate item in the basket if it is a valid item or not?!
@@ -62,13 +64,13 @@ def get_basket(skus):
 
 # return all offers for the input sku,
 # None if no offer found
-def get_offer(level, sku):
+def get_offer(level: str, sku: str) -> List[Dict]:
     if level not in SPECIAL_OFFERS:
         return None
     return SPECIAL_OFFERS[level].get(sku)
 
 
-def apply_offer_to_basket(sku, offer, basket):
+def apply_offer_to_basket(sku: str, offer: Dict, basket: Dict[str, int]):
     total = 0
     n = basket[sku] // offer[NO_OF_ITEMS]
     if n > 0:
@@ -82,7 +84,7 @@ def apply_offer_to_basket(sku, offer, basket):
 
 # noinspection PyUnusedLocal
 # skus = unicode string
-def checkout(skus):
+def checkout(skus: str) -> int:
     total = 0
 
     basket = get_basket(skus)
@@ -118,7 +120,8 @@ class CheckoutTestCase(unittest.TestCase):
 
     def test_sku_e_offer(self):
         res = checkout('EEEEEBBB')
-        self.assertEqual(res, 120 + 30)
+        self.assertEqual(res, 5*40 + 30)
+
 
 if __name__=='__main__':
     unittest.main()
