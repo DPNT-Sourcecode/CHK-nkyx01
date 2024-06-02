@@ -72,7 +72,7 @@ def apply_offer_to_basket(sku, offer, basket):
     n = basket[sku] // offer[NO_OF_ITEMS]
     if n > 0:
         basket[sku] -= n * offer[NO_OF_ITEMS]
-        total += n * SPECIAL_OFFERS[sku][PRICE]
+        total += n * offer[PRICE]
         if FREE in offer:
             basket[offer[FREE]] -= 1
     return total
@@ -111,3 +111,4 @@ class CheckoutTestCase(unittest.TestCase):
 
 if __name__=='__main__':
     unittest.main()
+
