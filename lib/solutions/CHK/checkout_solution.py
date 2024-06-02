@@ -181,11 +181,12 @@ class Basket:
         return total
     
     def check_and_apply_offers(self, level: int, sku: str, basket: Dict[str, int]) -> int:
+        total = 0
         offers = self._spcial_offers.get_offer(level, sku)
         if offers is not None:
             for offer in offers:
-                return self.apply_offer_to_basket(sku, offer, basket)
-        return 0
+                total += self.apply_offer_to_basket(sku, offer, basket)
+        return total
     
     def checkout(self):
         total = 0
