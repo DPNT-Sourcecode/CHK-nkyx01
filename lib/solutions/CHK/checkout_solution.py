@@ -299,11 +299,9 @@ class CheckoutTestCase(unittest.TestCase):
         self.assertEqual(res, 130+90)
 
     def test_STXXYZZZ(self):
-        res = checkout('STXXYZZZ')
-        self.assertEqual(res, 45*2+17*2)
+        res = checkout('Z'*4+'X'*4+'S'*2+'T'*2+'Y'*2)
+        self.assertEqual(res, 45*4+17*2)
 
 
 if __name__=='__main__':
     unittest.main()
-
-
