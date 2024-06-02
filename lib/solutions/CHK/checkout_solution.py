@@ -34,6 +34,11 @@ SPECIAL_OFFERS = {
             PRICE: 120,
             FREE: 'Q',
         }],
+        'U': [{
+            NO_OF_ITEMS: 3,
+            PRICE: 120,
+            FREE: 'U',
+        }],
     },
     LEVEL_2: {
         'A': [
@@ -78,6 +83,16 @@ SPECIAL_OFFERS = {
                 PRICE: 150,
             },
         ],
+        'V': [
+            {
+                NO_OF_ITEMS: 3,
+                PRICE: 130,
+            },
+            {
+                NO_OF_ITEMS: 2,
+                PRICE: 90,
+            },
+        ],
     }
 }
 
@@ -100,14 +115,14 @@ PRICE_TABLE = {
     'P': 50,
     'Q': 30,
     'R': 50,
-| S    | 30    |                        |
-| T    | 20    |                        |
-| U    | 40    | 3U get one U free      |
-| V    | 50    | 2V for 90, 3V for 130  |
-| W    | 20    |                        |
-| X    | 90    |                        |
-| Y    | 10    |                        |
-| Z    | 50'
+    'S': 30,
+    'T': 20,
+    'U': 40,
+    'V': 50,
+    'W': 20,
+    'X': 90,
+    'Y': 10,
+    'Z': 50,
 }
 
 
@@ -218,4 +233,5 @@ class CheckoutTestCase(unittest.TestCase):
 
 if __name__=='__main__':
     unittest.main()
+
 
