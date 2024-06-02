@@ -227,8 +227,8 @@ class CheckoutTestCase(unittest.TestCase):
         self.assertEqual(res, 130 + 50 + 2 * 45 + 20 + 15)
 
     def test_sku_a_offers(self):
-        res = checkout('AAAAAAAAA')
-        self.assertEqual(res, 380)
+        res = checkout('A'*9)
+        self.assertEqual(res, 200+130+50)
 
     def test_sku_e_offer(self):
         res = checkout('EEEEEBBB')
@@ -281,6 +281,3 @@ class CheckoutTestCase(unittest.TestCase):
 
 if __name__=='__main__':
     unittest.main()
-
-
-
