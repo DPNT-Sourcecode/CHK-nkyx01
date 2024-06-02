@@ -149,7 +149,14 @@ class CheckoutTestCase(unittest.TestCase):
         res = checkout('FFFF')
         self.assertEqual(res, 30)
 
+    def test_check_FFFFFF(self):
+        res = checkout('FFFFFF')
+        self.assertEqual(res, 40)
+
+    def test_check_FFFFFF(self):
+        res = checkout('FFFFFF')
+        self.assertEqual(res, 40)
+
+
 if __name__=='__main__':
     unittest.main()
-
-
