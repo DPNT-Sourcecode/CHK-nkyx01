@@ -33,7 +33,7 @@ def checkout(skus):
             basket[x] += 1
         else:
             basket[x] = 1
-    
+    print(basket)
     for x in basket:
         if x in SPECIAL_OFFERS:
             special_offer_no = SPECIAL_OFFERS[x][NO_OF_ITEMS]
@@ -46,12 +46,17 @@ def checkout(skus):
             total += basket[x] * PRICE_TABLE[x]
 
     return total
-print(__name__)
-if __name__=='__main__':
-    unittest.main()
+
 
 class CheckoutTestCase(unittest.TestCase):
     def test_check_invalid(self):
         res = checkout('ABHC')
         self.assertEqual(res, -1)
+
+    def test_has_special_offer(self):
+        res = checkout('ABBBACDABA')
+        self.assertEqual(res, 130 + 50 + 2 * 45 + 20 + 15)
+
+if __name__=='__main__':
+    unittest.main()
 
