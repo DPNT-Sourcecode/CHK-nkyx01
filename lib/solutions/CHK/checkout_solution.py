@@ -74,7 +74,9 @@ def apply_offer_to_basket(sku, offer, basket):
         basket[sku] -= n * offer[NO_OF_ITEMS]
         total += n * offer[PRICE]
         if FREE in offer:
-            basket[offer[FREE]] -= 1
+            free_sku = offer[FREE]
+            if basket.get(free_sku, 0) > 0:
+                basket[free_sku] -= 1
     return total
 
 # noinspection PyUnusedLocal
@@ -112,6 +114,9 @@ class CheckoutTestCase(unittest.TestCase):
     def test_sku_a_offers(self):
         res = checkout('AAAAAAAAA')
         self.assertEqual(res, 380)
+
+    def test_sku_e_offer(self):
+        res = checkout('EEEEEBB')
 
 if __name__=='__main__':
     unittest.main()
