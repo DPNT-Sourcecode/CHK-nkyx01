@@ -2,6 +2,7 @@ from typing import Dict, List
 
 import unittest
 
+SKUS = 'SKUs'
 NO_OF_ITEMS = 'numberOfItems'
 PRICE = 'price'
 FREE =  'free'
@@ -14,6 +15,11 @@ SPECIAL_OFFER_LEVELS = [LEVEL_1, LEVEL_2]
 # Special offers table and offers are proitrised
 SPECIAL_OFFERS = {
     LEVEL_1: {
+        '#': [{
+            SKUS: 'ZYSTX',
+            NO_OF_ITEMS: 3,
+            PRICE: 45
+        }],
         'E': [{
             NO_OF_ITEMS: 2,
             PRICE: 80,
@@ -203,7 +209,7 @@ def checkout(skus: str) -> int:
 
 class CheckoutTestCase(unittest.TestCase):
     def test_check_invalid(self):
-        res = checkout('ABHC&')
+        res = checkout('ABHC#')
         self.assertEqual(res, -1)
 
     def test_has_special_offer(self):
@@ -265,4 +271,5 @@ class CheckoutTestCase(unittest.TestCase):
 
 if __name__=='__main__':
     unittest.main()
+
 
