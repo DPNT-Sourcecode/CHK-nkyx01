@@ -80,7 +80,7 @@ SPECIAL_OFFERS = {
         'Q': [
             {
                 NO_OF_ITEMS: 3,
-                PRICE: 150,
+                PRICE: 80,
             },
         ],
         'V': [
@@ -249,6 +249,10 @@ class CheckoutTestCase(unittest.TestCase):
     def test_Q(self):
         res = checkout('Q'*4)
         self.assertEqual(res, 80*1+30)
+
+    def test_R(self):
+        res = checkout('R'*7+'QQQ')
+        self.assertEqual(res, 50*7+30)
 
 
 if __name__=='__main__':
