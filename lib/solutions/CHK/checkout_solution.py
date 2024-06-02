@@ -198,7 +198,7 @@ class Basket:
                 for sku in offer[SKUS]:
                     if basket.get(sku, 0) > 0:
                         mini_basket += basket[sku] * sku
-                        if len(mini_basket) > no_of_items:
+                        if len(mini_basket) >= no_of_items:
                             no_of_groups = len(mini_basket) // no_of_items
                             total += no_of_groups * offer[PRICE]
                             for i in range(no_of_groups*no_of_items):
@@ -305,4 +305,5 @@ class CheckoutTestCase(unittest.TestCase):
 
 if __name__=='__main__':
     unittest.main()
+
 
