@@ -19,6 +19,11 @@ SPECIAL_OFFERS = {
             PRICE: 80,
             FREE: 'B',
         }],
+        'F': [{
+            NO_OF_ITEMS: 2,
+            PRICE: 20,
+            FREE: 'F',
+        }]
     },
     LEVEL_2: {
         'A': [
@@ -44,6 +49,7 @@ PRICE_TABLE = {
     'C': 20,
     'D': 15,
     'E': 40,
+    'F': 10,
 }
 
 
@@ -140,6 +146,9 @@ class CheckoutTestCase(unittest.TestCase):
         res = checkout('EEEEEBBB')
         self.assertEqual(res, 5*40 + 30)
 
+    def test_check_2f_one_f_free(self):
+        res = checkout('FFFFF')
+        self.assertEqual(res, 40)
 
 if __name__=='__main__':
     unittest.main()
