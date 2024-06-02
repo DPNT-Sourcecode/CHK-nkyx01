@@ -147,8 +147,9 @@ class CheckoutTestCase(unittest.TestCase):
         self.assertEqual(res, 5*40 + 30)
 
     def test_check_2f_one_f_free(self):
-        res = checkout('FFFFF')
+        res = checkout('FFFF')
         self.assertEqual(res, 40)
 
 if __name__=='__main__':
     unittest.main()
+
