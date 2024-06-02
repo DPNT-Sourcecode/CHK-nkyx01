@@ -203,7 +203,7 @@ def checkout(skus: str) -> int:
 
 class CheckoutTestCase(unittest.TestCase):
     def test_check_invalid(self):
-        res = checkout('ABHC#')
+        res = checkout('ABHC&')
         self.assertEqual(res, -1)
 
     def test_has_special_offer(self):
@@ -236,7 +236,7 @@ class CheckoutTestCase(unittest.TestCase):
 
     def test_K(self):
         res = checkout('K'*5)
-        self.assertEqual(res, 150*2+80)
+        self.assertEqual(res, 120*2+70)
 
     def test_N(self):
         res = checkout('N'*7+'M'*1)
@@ -265,3 +265,4 @@ class CheckoutTestCase(unittest.TestCase):
 
 if __name__=='__main__':
     unittest.main()
+
