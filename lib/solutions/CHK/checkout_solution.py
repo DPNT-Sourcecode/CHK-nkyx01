@@ -6,6 +6,8 @@ SKUS = 'SKUs'
 NO_OF_ITEMS = 'numberOfItems'
 PRICE = 'price'
 FREE =  'free'
+GROUP_DISCOUNT_OFFER = '#'
+
 
 LEVEL_1 = 'level 1'
 LEVEL_2 = 'level 2'
@@ -15,7 +17,7 @@ SPECIAL_OFFER_LEVELS = [LEVEL_1, LEVEL_2]
 # Special offers table and offers are proitrised
 SPECIAL_OFFERS = {
     LEVEL_1: {
-        '#': [{
+        GROUP_DISCOUNT_OFFER: [{
             SKUS: 'ZYSTX',
             NO_OF_ITEMS: 3,
             PRICE: 45
@@ -167,9 +169,9 @@ class Basket:
                 basket[item] = 1
         return basket
 
-    def apply_offer_to_basket(self, sku: str, offer: Dict, basket: Dict[str, int]):
+    def apply_offer_to_basket(self, sku: str, offer: Dict, basket: Dict[str, int]) -> int:
         total = 0
-        while basket[sku] >= offer[NO_OF_ITEMS]:
+        while basket.get(sku, 0) >= offer[NO_OF_ITEMS]:
             basket[sku] -= offer[NO_OF_ITEMS]
             total += offer[PRICE]
             if FREE in offer:
@@ -177,6 +179,13 @@ class Basket:
                 if basket.get(free_sku, 0) > 0:
                     basket[free_sku] -= 1
         return total
+    
+    def check_and_apply_offers(self, level: int, sku: str, basket: Dict[str, int]) -> int:
+        offers = self._spcial_offers.get_offer(level, sku)
+        if offers is not None:
+            for offer in offers:
+                return self.apply_offer_to_basket(sku, offer, basket)
+        return 0
     
     def checkout(self):
         total = 0
@@ -186,12 +195,13 @@ class Basket:
             return -1
         
         for level in self._spcial_offers.offer_levels:
-            for sku in basket:
-                offers = self._spcial_offers.get_offer(level, sku)
-                if offers is not None:
-                    for offer in offers:
-                        total += self.apply_offer_to_basket(sku, offer, basket)
+            # Check and apply group discount offer
+            total += self.check_and_apply_offers(level, GROUP_DISCOUNT_OFFER, basket)
 
+            # Check and apply special offers
+            for sku in basket:
+                total += self.check_and_apply_offers(level, sku, basket)
+            
         for sku in basket:
             if basket[sku] > 0:
                 total += basket[sku] * self._price_table[sku]
@@ -271,5 +281,6 @@ class CheckoutTestCase(unittest.TestCase):
 
 if __name__=='__main__':
     unittest.main()
+
 
 
