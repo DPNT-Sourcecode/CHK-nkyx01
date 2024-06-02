@@ -262,8 +262,6 @@ class CheckoutTestCase(unittest.TestCase):
         res = checkout('V'*5)
         self.assertEqual(res, 130+90)
 
+
 if __name__=='__main__':
     unittest.main()
-
-
-
