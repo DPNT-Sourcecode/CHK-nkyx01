@@ -40,7 +40,8 @@ PRICE_TABLE = {
     'A': 50,
     'B': 30,
     'C': 20,
-    'D': 15
+    'D': 15,
+    'E': 40,
 }
 
 
@@ -76,7 +77,7 @@ def apply_offer_to_basket(sku, offer, basket):
         if FREE in offer:
             free_sku = offer[FREE]
             if basket.get(free_sku, 0) > 0:
-                basket[free_sku] -= 1
+                basket[free_sku] -= n
     return total
 
 # noinspection PyUnusedLocal
@@ -116,7 +117,8 @@ class CheckoutTestCase(unittest.TestCase):
         self.assertEqual(res, 380)
 
     def test_sku_e_offer(self):
-        res = checkout('EEEEEBB')
+        res = checkout('EEEEEBBB')
+        self.assertEqual(res, 120 + 30)
 
 if __name__=='__main__':
     unittest.main()
