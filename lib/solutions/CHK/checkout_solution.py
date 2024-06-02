@@ -31,7 +31,7 @@ SPECIAL_OFFERS = {
         }],
         'R': [{
             NO_OF_ITEMS: 3,
-            PRICE: 120,
+            PRICE: 150,
             FREE: 'Q',
         }],
         'U': [{
@@ -264,5 +264,6 @@ class CheckoutTestCase(unittest.TestCase):
 
 if __name__=='__main__':
     unittest.main()
+
 
 
